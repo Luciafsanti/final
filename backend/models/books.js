@@ -1,12 +1,12 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./database'); // Importa la instancia de Sequelize para la conexión a la base de datos
+/*const { Model, DataTypes } = require('sequelize');
+const sequelize = require('./database');
+const category = require('./category');
 
-// Define el modelo de libros
+
 class books extends Model { }
 
 books.init(
   {
-    // Definición de columnas de la tabla
     book_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -14,38 +14,130 @@ books.init(
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false, // No permite valores nulos
+      allowNull: false,
     },
     author: {
       type: DataTypes.STRING,
-      allowNull: false, // No permite valores nulos
+      allowNull: false,
     },
     ISBN: {
       type: DataTypes.STRING,
-      allowNull: false, // No permite valores nulos
-      unique: true, // Asegura que el valor de ISBN sea único
+      allowNull: false,
+      unique: true,
     },
     price: {
-      type: DataTypes.DECIMAL(10, 2), // Precio con hasta 10 dígitos y 2 decimales
-      allowNull: false, // No permite valores nulos
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     stock: {
       type: DataTypes.INTEGER,
-      allowNull: false, // No permite valores nulos
-      defaultValue: 0, // Valor predeterminado
+      allowNull: false,
+      defaultValue: 0,
     },
-    category: {
+    category_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: category,
+        key: 'category_id',
+      },
+    },
+    image_url: {
       type: DataTypes.STRING,
-      allowNull: false, // No permite valores nulos
-      defaultValue: 'General', // Valor predeterminado
+      allowNull: true
     },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   },
   {
-    sequelize, // La conexión a la base de datos
-    modelName: 'books', // Nombre del modelo
-    tableName: 'libros', // Nombre de la tabla
-    timestamps: false, // Deshabilita timestamps como `createdAt` y `updatedAt`
+    sequelize,
+    modelName: 'books'
   }
 );
 
-module.exports = books;
+
+books.belongsTo(category, { foreignKey: 'category_id', as: 'category' });
+
+module.exports = books;*/
+
+////////////////////////////////////
+
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class books extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+
+    }
+  }
+  books.init(
+    {
+      book_id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      author: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      ISBN: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+      },
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      image_url: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      description: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+      }
+    },
+    {
+      sequelize,
+      modelName: 'books'
+    }
+  );
+  return books;
+};
+
+/*
+    detail_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    product_price FLOAT NOT NULL,
+    total_detail FLOAT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (product_price) REFERENCES products(price)
+*/

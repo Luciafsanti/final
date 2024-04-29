@@ -37,6 +37,14 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//sequelize.sync({ alter: true })
+//  .then(() => {
+//    console.log('Database synchronized successfully');
+//  })
+//  .catch(err => {
+//    console.error('Unable to synchronize database:', err);
+//  });
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
