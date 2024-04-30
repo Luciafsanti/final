@@ -76,7 +76,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      books.belongsTo(models.categories, { foreignKey: 'category_id' });
 
     }
   }
@@ -111,7 +111,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       category_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        references: {
+          model: 'categories',
+          key: 'category_id',
+        },
       },
       image_url: {
         type: DataTypes.STRING,
