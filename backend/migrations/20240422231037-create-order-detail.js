@@ -3,28 +3,45 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('order_details', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
+      detail_id: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        autoIncrement: true,
+        allowNull: false
       },
-      firstName: {
-        type: Sequelize.STRING
+      order_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'orders',
+          key: 'order_id'
+        }
       },
-      lastName: {
-        type: Sequelize.STRING
+      book_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'books',
+          key: 'book_id'
+        }
       },
-      email: {
-        type: Sequelize.STRING
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      total_detail: {
+        type: Sequelize.FLOAT
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        onUpdate: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

@@ -25,6 +25,9 @@ app.use("/libros", productsRouter);
 const userRouter = require("../routes/userRouter");
 app.use("/usuarios", userRouter);
 
+const categoryRouter = require("../routes/categoriesRouter");
+app.use("/categorias", categoryRouter);
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
