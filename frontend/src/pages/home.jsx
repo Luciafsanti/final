@@ -3,6 +3,10 @@ import Novedades from "../components/home/novedades";
 //import ProductosSlide from '../components/home/productosSlide';
 import useBooks from "../hooks/use-books";
 import styled from "styled-components";
+import BookContainer from "../components/books/books-container";
+import BookCard from "../components/books/book-card";
+import BodyContainer from "../components/body-container";
+import Search from "../components/search";
 
 const bookCard = styled.div`
   width: 90px;
@@ -21,29 +25,21 @@ const bookContainer = styled.div`
 `;
 
 const Home = () => {
-  const { books, loadind } = useBooks();
+  const { books, loadind, filterBooks, filteredBooks } = useBooks();
 
   if (loadind) {
     return <h1>cargando</h1>;
   }
   return (
-    <div>
-      <h1>Home</h1>
+    <BodyContainer>
+      <Search handleSearch={filterBooks} />
       <Novedades />
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        {books.map((book, index) => (
-          <div key={"bookCard" + index}>
-            <img
-              src={book.image_url}
-              style={{ height: "15rem", width: "10rem" }}
-              alt=""
-            />
-            <h2>{book.title}</h2>
-            <h3>{book.author}</h3>
-          </div>
+      <BookContainer>
+        {filteredBooks.map((book) => (
+          <BookCard book={book} key={book.id}></BookCard>
         ))}
-      </div>
-    </div>
+      </BookContainer>
+    </BodyContainer>
   );
 };
 

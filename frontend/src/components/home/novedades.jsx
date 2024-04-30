@@ -10,6 +10,8 @@ const Title = styled.div`
   && h2 {
     color: var(--Reseda-green);
     font-size: 1.5rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -61,7 +63,7 @@ const Novedades = () => {
       image:
         "https://lalibrearteylibros.files.wordpress.com/2020/07/ya-estamso.png",
       novedad: "/novedad1",
-      title: "10% de descuento los dias martes del mes de abril",
+      title: "10% de descuento los dias martes del mes de mayo",
     },
     {
       id: 2,
@@ -82,7 +84,7 @@ const Novedades = () => {
 
   // Usar un efecto para rotar las tarjetas automáticamente a intervalos regulares
   useEffect(() => {
-    const interval = setInterval(rotateCard, 3000); // Cambia la tarjeta cada 3 segundos
+    const interval = setInterval(rotateCard, 5000); // Cambia la tarjeta cada 3 segundos
 
     // Limpiar el intervalo cuando se desmonte el componente
     return () => clearInterval(interval);

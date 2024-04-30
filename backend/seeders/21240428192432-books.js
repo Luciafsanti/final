@@ -72,7 +72,7 @@ module.exports = {
         price: 7000,
         stock: 6,
         category_id: 6,
-        image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/AUSTEN%281894%29_Pride_and_prejudice_%2815811958311%29.jpg/640px-AUSTEN'
+        image_url: 'https://assets-global.website-files.com/6034d7d1f3e0f52c50b2adee/6540f3a95dd2301ef9751dd6_H2tjHnUNhg_lBh5PnN9lJhXAfqX5EUHakOyByeEodU4.jpeg'
       },
       {
         title: 'El Principito',

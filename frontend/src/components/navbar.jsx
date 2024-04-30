@@ -143,11 +143,6 @@ const Navbar = () => {
       </Logo>
       <MenuIcon onClick={toggleMenu}>&#9776;</MenuIcon>
       <NavbarMenu isOpen={isOpen}>
-        <SearchContainer>
-          <SearchInput type="text" placeholder="Buscar..." />
-          <SearchButton>Buscar</SearchButton>
-          <FilterButton>Filtro</FilterButton>
-        </SearchContainer>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/login">Iniciar sesión</NavLink>
         <NavLink to="/register">Registrarse</NavLink>
