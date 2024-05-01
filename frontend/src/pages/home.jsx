@@ -7,6 +7,7 @@ import BookContainer from "../components/books/books-container";
 import BookCard from "../components/books/book-card";
 import BodyContainer from "../components/body-container";
 import Search from "../components/search";
+import useCategories from "../hooks/use-categories";
 
 const bookCard = styled.div`
   width: 90px;
@@ -26,6 +27,7 @@ const bookContainer = styled.div`
 
 const Home = () => {
   const { books, loadind, filterBooks, filteredBooks } = useBooks();
+  const { categories } = useCategories();
 
   if (loadind) {
     return <h1>cargando</h1>;

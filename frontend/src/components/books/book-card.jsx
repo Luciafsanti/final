@@ -51,9 +51,19 @@ const BookPrice = styled.p`
   font-size: 15px;
 `;
 
+const BookCategory = styled(Link)`
+  color: grey;
+  text-decoration: none;
+  font-size: 10px;
+
+  &&:hover {
+    color: var(--Reseda-green-hover);
+  }
+`;
+
 const BookCard = ({ book }) => {
   return (
-    <BookCardContainer>
+    <BookCardContainer key={book.book_id}>
       <BookImg to={"/libros/" + book.book_id}>
         <img src={book.image_url} />
       </BookImg>
