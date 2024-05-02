@@ -4,17 +4,14 @@ import { useEffect, useState } from "react";
 const useCategories = () => {
   const [categories, setCategories] = useState([]);
 
-  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [categoryById, setategoryById] = useState();
 
-  const filterCategories = (title) => {
-    let newCategories = categories.filter((category) => {
-      return (
-        category.title.toLowerCase().includes(title.toLowerCase()) ||
-        category.author.toLowerCase().includes(title.toLowerCase())
-      );
-    });
-    setFilteredCategories(newCategories);
-  };
+const findCategoryById = (category_id) => {
+  if(category_id){
+  axios.get(`http://localhost:3000/categorias/${category_id}`).then((response) => {
+    setategoryById(response.data);
+  }, []);}
+}
 
   useEffect(() => {
     axios.get("http://localhost:3000/categorias").then((response) => {
@@ -22,7 +19,9 @@ const useCategories = () => {
     }, []);
   }, []);
 
-  return { categories, filterCategories, filteredCategories };
+
+
+  return { categories, findCategoryById, categoryById };
 };
 
 export default useCategories;
