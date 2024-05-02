@@ -11,10 +11,10 @@ const { body, validationResult } = require("express-validator");
 //
 const validateUser = [
   body('username').custom(value => {
-  //  if (getUsers().map.some(user => user.username === value)) {
-  //    console.log(User.findOne({ where: { username: value}}));
-  //    return Promise.reject('El nombre de usuario ya existe.');
-  //  }
+    //  if (getUsers().map.some(user => user.username === value)) {
+    //    console.log(User.findOne({ where: { username: value}}));
+    //    return Promise.reject('El nombre de usuario ya existe.');
+    //  }
     return true;
   }),
   body('password').isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres.'),
@@ -49,9 +49,9 @@ async function getUserById(req, res) {
 }
 
 const createUser = async (req, res) => {
-  let { username, password, email } = req.body;
+  let { username, password, email, name, lastname } = req.body;
   password = bcrypt.hashSync(password, 10);
-  const user = await User.create({ username, password, email });
+  const user = await User.create({ username, password, email, name, lastname });
   res.json(user);
 };
 
@@ -59,14 +59,14 @@ const updateUser = async (req, res) => {
   let userId = req.params.userId;
   let user = User.findByPk(userId);
   if (user) {
-    let { newUsername, newPassword, newEmail } = req.body;
+    let { newUsername, newPassword, newEmail, newName, newLastname } = req.body;
     if (!newPassword) {
       newPassword = user.password
     } else {
       newPassword = bcrypt.hashSync(newPassword, 10);
     }
-    if (newUsername !== undefined || newPassword !== undefined || newEmail !== undefined) {
-      await User.update({ username: newUsername || user.username, password: newPassword || user.password, email: newEmail || user.email }, {
+    if (newUsername !== undefined || newPassword !== undefined || newEmail !== undefined || newName !== undefined || newLastname !== undefined) {
+      await User.update({ username: newUsername || user.username, password: newPassword || user.password, email: newEmail || user.email, name: newName || user.name, lastaname: newLastname || user.lastaname }, {
         where: {
           user_id: userId
         }

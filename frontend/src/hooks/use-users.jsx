@@ -1,29 +1,36 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import bcrypt from "bcryptjs-react";
 
 const useUsers = () => {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errors, setError] = useState({});
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            const response = await fetch("http://localhost:3000/usuarios");
-            const data = await response.json();
-            console.log('Data received from backend:', data);
-            setUsers(data);
-            setLoading(false);
+  const compareUsers = (username, password) => {
+    if (
+      !users.find((user) => user.username === username) ||
+      !bcrypt.compareSync(
+        password,
+        users.filter((user) => user.username === username).password
+      )
+    ) {
+      console.log(errors);
+      setError({ message: "Usuario o contraseña incorrectos" });
+    } else {
+      console.log("siii");
+      setError(null);
+    }
+  };
 
-        };
-
-        fetchData();
-        return { users, loading };
+  useEffect(() => {
+    setLoading(true);
+    axios.get("http://localhost:3000/usuarios").then((response) => {
+      setUsers(response.data);
+      setLoading(false);
     }, []);
+  }, []);
 
-
-
-}
-
-
+  return { users, loading, compareUsers };
+};
 export default useUsers;
-
-

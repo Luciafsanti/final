@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useLogin from "../store/useLogin";
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -126,8 +127,14 @@ const NavbarMenu = styled.div`
   }
 `;
 
+const User = styled.h2`
+  color: var(--WhiteSmoke);
+  font-size: 0.75rem;
+`;
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { username } = useLogin();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -141,12 +148,18 @@ const Navbar = () => {
           Aromito Librería{" "}
         </Link>
       </Logo>
+      {username && <User>{username}</User>}
       <MenuIcon onClick={toggleMenu}>&#9776;</MenuIcon>
       <NavbarMenu isOpen={isOpen}>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/login">Iniciar sesión</NavLink>
-        <NavLink to="/register">Registrarse</NavLink>
+        {!username && (
+          <>
+            <NavLink to="/login">Iniciar sesión</NavLink>
+            <NavLink to="/register">Registrarse</NavLink>
+          </>
+        )}
         <NavLink to="/cart">Carrito</NavLink>
+        {username && <NavLink to="/logout">Cerrar sesión</NavLink>}
       </NavbarMenu>
     </NavbarContainer>
   );

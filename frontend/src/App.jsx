@@ -7,6 +7,7 @@ import Register from "./pages/register";
 import Footer from "./components/footer";
 import Cart from "./pages/cart";
 import BookDetail from "./pages/prod-detail";
+import Logout from "./pages/logout";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/libros/:book_id" element={<BookDetail />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
     </>

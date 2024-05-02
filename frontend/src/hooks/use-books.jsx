@@ -46,9 +46,11 @@ const useBooks = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axios.get("http://localhost:3000/libros").then((response) => {
       setBooks(response.data);
       setFilteredBooks(response.data);
+      setLoading(false);
     }, []);
   }, []);
 

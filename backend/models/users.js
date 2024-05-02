@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     acces_type: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "client"
     },
     username: {
       type: DataTypes.STRING,
