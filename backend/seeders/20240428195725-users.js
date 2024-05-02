@@ -9,19 +9,25 @@ module.exports = {
         acces_type: 'admin',
         username: 'user1',
         password: '$2y$10$Mt4Em/U0xK/XuIRrWoLV2.sjRJl1pDRdQmB1FQoeXfwI0VANjHZ5u',
-        email: 'user1@example.com'
+        email: 'user1@example.com',
+        name: 'Juan',
+        lastname: 'Perez'
       },
       {
         acces_type: 'client',
         username: 'user2',
         password: '$2y$10$diQIQslHI9d4W2EyNqmxuutikf2ByWHTsE8Rv6.wT5ZOACvmdHX3e',
-        email: 'user2@example.com'
+        email: 'user2@example.com',
+        name: 'Maria',
+        lastname: 'Garcia'
       },
       {
         acces_type: 'client',
         username: 'user3',
         password: '$2y$10$ZDh9t9Xo1bJvFxIAErKGSu0eAOZfUH0TYxXYTo4QzBZf1DyoDpbye',
-        email: 'user3@example.com'
+        email: 'user3@example.com',
+        name: 'Alejandro',
+        lastname: 'Martinez'
       },
 
     ];
