@@ -13,7 +13,7 @@ import useCart from "../store/useCart";
 
 function ConfirmOrder() {
   const navigate = useNavigate();
-  const { items, total } = useCart();
+  const { items, total, cleanCart } = useCart();
   const { username, user_id } = useLogin();
 
   let books = Object.values(items);
@@ -55,6 +55,7 @@ function ConfirmOrder() {
       .catch(function (error) {
         console.log(error);
       });
+    cleanCart();
   };
 
   return (

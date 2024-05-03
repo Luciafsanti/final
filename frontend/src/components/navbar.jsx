@@ -129,7 +129,7 @@ const NavbarMenu = styled.div`
 
 const User = styled.h2`
   color: var(--WhiteSmoke);
-  font-size: 0.75rem;
+  font-size: 1rem;
 `;
 
 const Navbar = () => {
@@ -148,7 +148,7 @@ const Navbar = () => {
           Aromito Librería{" "}
         </Link>
       </Logo>
-      {username && <User>{username}</User>}
+      {username && <User>Hola! {username}</User>}
       <MenuIcon onClick={toggleMenu}>&#9776;</MenuIcon>
       <NavbarMenu isOpen={isOpen}>
         <NavLink to="/">Home</NavLink>
@@ -159,8 +159,8 @@ const Navbar = () => {
           </>
         )}
         <NavLink to="/cart">Carrito</NavLink>
-        {username && <NavLink to="/logout">Cerrar sesión</NavLink>}
         {username && <NavLink to="/orders">Mis compras</NavLink>}
+        {username && <NavLink to="/logout">Cerrar sesión</NavLink>}
       </NavbarMenu>
     </NavbarContainer>
   );

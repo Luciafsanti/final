@@ -26,6 +26,7 @@ const useCart = create(persist((set) => ({
         total = total_price;
         return { total };
     }),
+    cleanCart: () => set({ items: {}, total: 0 })
 }), {
     name: "cartStorage",
     getStorage: () => localStorage,

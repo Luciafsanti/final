@@ -4,21 +4,26 @@ import styled from "styled-components";
 import useCart from "../../store/useCart";
 
 const CartCard = styled.div`
-  width: 50vw;
+  width: 95vw;
   display: flex;
   background-color: var(--WhiteSmoke);
   flex-direction: row;
   flex-wrap: wrap;
-  height: 110px;
+  height: 120px;
   justify-content: space-around;
   align-content: center;
   align-items: center;
   margin: 0px;
   border-radius: 0.5rem;
+
+  @media (min-width: 768px) {
+    width: 50vw;
+  }
 `;
 
 const ProductImage = styled.img`
-  height: 100px;
+  height: auto;
+  max-height: 110px;
   display: flex;
 `;
 
@@ -58,8 +63,10 @@ const CartProducts = ({ book }) => {
   return (
     <CartCard>
       <ProductImage src={book.image_url} />
-      <BookTitle to={"/libros/" + book.book_id}>{book.title}</BookTitle>
-      <ProductPrice>{book.quantity + "x $" + book.price}</ProductPrice>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <BookTitle to={"/libros/" + book.book_id}>{book.title}</BookTitle>
+        <ProductPrice>{book.quantity + "x $" + book.price}</ProductPrice>
+      </div>
       <ProductNumber
         key={book.book_id}
         type="number"
