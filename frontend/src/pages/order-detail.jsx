@@ -54,7 +54,7 @@ function OrderDetail() {
               <th>Libro</th>
               <th>Cantidad</th>
               <th>Precio unitario</th>
-              <th>Total</th>
+              <th>Importe</th>
             </tr>
           </thead>
           <tbody>
@@ -63,8 +63,8 @@ function OrderDetail() {
                 <tr key={detail.detail_id}>
                   <td>{bookTitles[index]}</td>
                   <td>{detail.quantity}</td>
-                  <td>{prices[index]}</td>
-                  <td>{detail.total_detail}</td>
+                  <td>$ {prices[index]}</td>
+                  <td>$ {detail.total_detail}</td>
                 </tr>
               ))
             ) : (

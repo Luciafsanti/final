@@ -49,7 +49,7 @@ function ConfirmOrder() {
             });
         });
 
-        navigate("/order-detail");
+        navigate(`/orders/${orderId}/order-detail`);
         alert("Compra realizada exitosamente");
       })
       .catch(function (error) {

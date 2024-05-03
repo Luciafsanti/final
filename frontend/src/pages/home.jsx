@@ -38,7 +38,7 @@ const Home = () => {
       <Novedades />
       <BookContainer>
         {filteredBooks.map((book) => (
-          <BookCard book={book} key={book.id}></BookCard>
+          <BookCard book={book} key={book.book_id}></BookCard>
         ))}
       </BookContainer>
     </BodyContainer>
