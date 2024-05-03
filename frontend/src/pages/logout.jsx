@@ -29,8 +29,10 @@ const Logout = () => {
       <FormTitle>
         <h2>¿Cerrar sesión?</h2>
       </FormTitle>
-      <FormButton onClick={handleAccept}>Aceptar</FormButton>
-      <FormButton onClick={handleCancel}>Cancelar</FormButton>
+      <FormComponent>
+        <FormButton onClick={handleAccept}>Aceptar</FormButton>
+        <FormButton onClick={handleCancel}>Cancelar</FormButton>
+      </FormComponent>
     </FormContainer>
   );
 };

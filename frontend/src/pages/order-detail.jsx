@@ -21,7 +21,9 @@ function OrderDetail() {
   const { findOrderDetailByOrderID, orderDetailByOrderID } = useOrders();
   const { order_id } = useParams();
   const { books } = useBooks();
+  const { orders } = useOrders();
   console.log(order_id);
+  console.log(orders);
 
   useEffect(() => {
     findOrderDetailByOrderID(order_id);
@@ -41,6 +43,13 @@ function OrderDetail() {
   const prices = titles.map((book) => (book ? book.price : ""));
 
   console.log(prices);
+  console.log(orders);
+  const ordersArray = Object.values(orders);
+  console.log(ordersArray);
+  const order = ordersArray.find(
+    (order) => order.order_id === Number(order_id)
+  );
+  console.log(order, Number(order_id));
 
   return (
     <BodyContainer>
@@ -70,6 +79,20 @@ function OrderDetail() {
             ) : (
               <tr>
                 <td colSpan="4">Cargando...</td>
+              </tr>
+            )}{" "}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td> </td>
+            </tr>
+            {order && (
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Total (envío incluído):</td>
+                <td>$ {order.total_price}</td>
               </tr>
             )}
           </tbody>

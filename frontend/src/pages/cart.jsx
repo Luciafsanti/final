@@ -94,10 +94,6 @@ const Cart = (book) => {
     }
   };
 
-  useEffect(() => {
-    setTotalPrice(subtotal + envio);
-  }, [items]);
-
   let books = Object.values(items);
   let prices = books.map((book) => Number(book.price) * book.quantity);
 
@@ -105,6 +101,9 @@ const Cart = (book) => {
   let envio = subtotal > 25000 ? 0 : 1600;
   let totalPrice = subtotal + envio;
 
+  useEffect(() => {
+    setTotalPrice(subtotal + envio);
+  }, [items]);
   return (
     <CartContainer>
       {/*JSON.stringify(items)*/}
