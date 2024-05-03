@@ -50,7 +50,7 @@ const Login = () => {
     if (!errorFinded) {
       navigate("/");
       alert("Sesion iniciada correctamente");
-      login(username, user.user_id);
+      login(username, user.user_id, user.acces_type);
     }
   };
 

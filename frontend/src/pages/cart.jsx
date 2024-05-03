@@ -79,6 +79,8 @@ const Cart = (book) => {
   const { username, user_id, acces_type } = useLogin();
   const [errors, setErrors] = useState({});
 
+  console.log(acces_type);
+
   const handleOrder = (e) => {
     e.preventDefault();
     if (!username) {

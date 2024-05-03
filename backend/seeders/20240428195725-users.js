@@ -8,7 +8,7 @@ module.exports = {
       {
         acces_type: 'admin',
         username: 'user1',
-        password: '$2y$10$Mt4Em/U0xK/XuIRrWoLV2.sjRJl1pDRdQmB1FQoeXfwI0VANjHZ5u',
+        password: '$2y$10$Mt4Em/U0xK/XuIRrWoLV2.sjRJl1pDRdQmB1FQoeXfwI0VANjHZ5u', // Password1
         email: 'user1@example.com',
         name: 'Juan',
         lastname: 'Perez'
