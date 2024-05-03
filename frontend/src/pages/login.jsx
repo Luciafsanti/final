@@ -28,6 +28,7 @@ const Login = () => {
     let user = users.find((user) => user.username === username);
 
     if (
+      !user ||
       !user.username === username ||
       !bcrypt.compareSync(password, user.password)
     ) {
@@ -71,10 +72,6 @@ const Login = () => {
           placeholder="Contraseña"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div>
-          <input type="checkbox" name="save-session" id="save-session" />
-          <label htmlFor="save-session">Recordarme</label>
-        </div>
         <FormButton type="submit">Acceder</FormButton>
         <FormLink to="/register">Registrarse</FormLink>
         <FormLink to="/lost-password">Olvidé mi contraseña</FormLink>

@@ -27,10 +27,13 @@ function Orders() {
         <tbody>
           {orderArray.map((order) => (
             <tr key={order.order_id}>
-              <Link to={`/orders/${order.order_id}/order-detail`}>
-                <td>{order.date}</td>
-                <td>{order.total_price}</td>
-              </Link>
+              <td>
+                <Link to={`/orders/${order.order_id}/order-detail`}>
+                  {order.date}
+                </Link>
+              </td>
+
+              <td>{order.total_price}</td>
             </tr>
           ))}
         </tbody>

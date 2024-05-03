@@ -61,7 +61,7 @@ const CartProducts = ({ book }) => {
   };
 
   return (
-    <CartCard>
+    <CartCard key={book.book_id}>
       <ProductImage src={book.image_url} />
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         <BookTitle to={"/libros/" + book.book_id}>{book.title}</BookTitle>
