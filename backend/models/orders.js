@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     date: {
       type: DataTypes.DATE,
-      allowNull: false
+      defaultValue: DataTypes.CURRENT_TIMESTAMP
     },
     total_price: {
       type: DataTypes.FLOAT

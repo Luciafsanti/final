@@ -8,6 +8,9 @@ import Footer from "./components/footer";
 import Cart from "./pages/cart";
 import BookDetail from "./pages/prod-detail";
 import Logout from "./pages/logout";
+import ConfirmOrder from "./pages/confirm-order";
+import OrderDetail from "./pages/order-detail";
+import Orders from "./pages/orders";
 
 const App = () => {
   return (
@@ -20,6 +23,12 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/libros/:book_id" element={<BookDetail />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/confirmar-compra" element={<ConfirmOrder />} />
+        <Route path="/orders/" element={<Orders />} />
+        <Route
+          path="/orders/:order_id/order-detail"
+          element={<OrderDetail />}
+        />
       </Routes>
       <Footer />
     </>

@@ -18,7 +18,6 @@ const useUsers = () => {
       console.log(errors);
       setError({ message: "Usuario o contraseña incorrectos" });
     } else {
-      console.log("siii");
       setError(null);
     }
   };

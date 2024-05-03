@@ -18,7 +18,7 @@ module.exports = {
       },
       date: {
         type: Sequelize.DATE,
-        allowNull: false
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       total_price: {
         type: Sequelize.FLOAT

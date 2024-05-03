@@ -26,7 +26,7 @@ const Login = () => {
 
     let errorFinded = false;
     let user = users.find((user) => user.username === username);
-    console.log(user, user.username, user.password);
+
     if (
       !user.username === username ||
       !bcrypt.compareSync(password, user.password)
@@ -50,7 +50,7 @@ const Login = () => {
     if (!errorFinded) {
       navigate("/");
       alert("Sesion iniciada correctamente");
-      login(username);
+      login(username, user.user_id);
     }
   };
 

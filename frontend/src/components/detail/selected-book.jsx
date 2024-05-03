@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useCart from "../../store/useCart";
 
 const Container = styled.div`
   background-color: var(--WhiteSmoke);
@@ -117,6 +118,7 @@ const BookPrice = styled.p`
 `;
 
 const SelectedBook = ({ book }) => {
+  const { addItem } = useCart();
   return (
     <Detail>
       <BookCover>
@@ -126,7 +128,13 @@ const SelectedBook = ({ book }) => {
         <Title>{book.title}</Title>
         <BookAuthor>{book.author}</BookAuthor>
         <BookPrice>{`$${book.price}`}</BookPrice>
-        <Button>Agregar al carrito</Button>
+        <Button
+          onClick={() => {
+            addItem(book);
+          }}
+        >
+          Agregar al carrito
+        </Button>
       </BookTitle>
       <BookDescription>
         <h2 style={{ margin: "5rem 1rem 0rem" }}>Descripción</h2>

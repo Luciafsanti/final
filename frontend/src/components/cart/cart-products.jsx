@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const ListContainer = styled.div`
-  grid-area: p;
-  width: 100%;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-`;
+import useCart from "../../store/useCart";
 
 const CartCard = styled.div`
-  width: 90%;
+  width: 50vw;
+  display: flex;
+  background-color: var(--WhiteSmoke);
   flex-direction: row;
   flex-wrap: wrap;
-  height: 105px;
+  height: 110px;
   justify-content: space-around;
-  align-content: flex-start;
+  align-content: center;
   align-items: center;
   margin: 0px;
+  border-radius: 0.5rem;
 `;
 
-const ProductImage = styled.image`
-  margin: 2.5px 1rem 0 1rem;
+const ProductImage = styled.img`
   height: 100px;
+  display: flex;
 `;
 
 const ProductNumber = styled.input`
@@ -46,28 +40,34 @@ const ProductPrice = styled.p`
 `;
 
 const CartProducts = ({ book }) => {
-  const [quantity, setQuantity] = useState(0);
+  const { changeQuantity, deleteItem } = useCart();
 
-  const addOne = () => {
-    setQuantity(quantity + 1);
+  const handleQuantityChange = (e) => {
+    e.preventDefault();
+
+    if (book.quantity !== e.target.value) {
+      changeQuantity(book.book_id, e.target.value);
+    }
   };
 
-  useEffect((e) => addOne());
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteItem(book.book_id);
+  };
 
   return (
-    <ListContainer>
-      <CartCard>
-        <ProductImage src={book.image_url} />
-        <BookTitle to={"/libros/" + book.book_id}>{book.title}</BookTitle>
-        <ProductPrice>{book.price}</ProductPrice>
-        <ProductNumber
-          key={book.book_id}
-          type="number"
-          value={quantity}
-          onChange={addOne}
-        />
-      </CartCard>
-    </ListContainer>
+    <CartCard>
+      <ProductImage src={book.image_url} />
+      <BookTitle to={"/libros/" + book.book_id}>{book.title}</BookTitle>
+      <ProductPrice>{book.quantity + "x $" + book.price}</ProductPrice>
+      <ProductNumber
+        key={book.book_id}
+        type="number"
+        defaultValue={book.quantity}
+        onChange={handleQuantityChange}
+      />
+      <button onClick={handleDelete}>Eliminar</button>
+    </CartCard>
   );
 };
 

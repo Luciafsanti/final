@@ -1,12 +1,12 @@
-const Order = require("../models").oders;
-const OrderDetail = require("../models").oder_detail;
+const Order = require("../models").orders;
+const OrderDetail = require("../models").order_detail;
 
-async function getAllOrders(req, res){
+async function getAllOrders(req, res) {
     const orders = await Order.findAll();
     res.json(orders);
 }
 
-async function getOrderById(req, res){
+async function getOrderById(req, res) {
     const { orderId } = req.params;
     const order = await Order.findByPk(orderId);
     if (!order) {
@@ -15,9 +15,9 @@ async function getOrderById(req, res){
     res.json(order);
 }
 
-async function getOrderDetail(req, res){
+async function getOrderDetails(req, res) {
     const { orderId } = req.params;
-    const orderDetail = await OrderDetail.findByPk(orderId);
+    const orderDetail = await OrderDetail.findAll({ where: { order_id: orderId } });
     if (!orderDetail) {
         return res.status(404).json({ message: "OrderDetail not found" });
     }
@@ -25,15 +25,31 @@ async function getOrderDetail(req, res){
 }
 
 const newOrderDetail = async (req, res, next) => {
-    const { orderDetail } = req.body;
-    const newOrderDetail = await OrderDetail.create({ orderDetail });
-    res.json(newOrderDetail);        
+    const { order_id,
+        book_id,
+        quantity,
+        total_detail } = req.body;
+    const newOrderDetail = await OrderDetail.create({
+        order_id,
+        book_id,
+        quantity,
+        total_detail
+    });
+    res.json(newOrderDetail);
 }
 
-async function createOrder(req, res){
-    const { order } = req.body;
-    const newOrder = await Order.create({ order });
+
+async function createOrder(req, res) {
+    const { user_id, total_price } = req.body;
+    const newOrder = await Order.create({ user_id, total_price });
     res.json(newOrder);
 
 }
 
+module.exports = {
+    getAllOrders,
+    getOrderById,
+    getOrderDetails,
+    newOrderDetail,
+    createOrder,
+};

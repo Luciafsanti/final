@@ -160,6 +160,7 @@ const Navbar = () => {
         )}
         <NavLink to="/cart">Carrito</NavLink>
         {username && <NavLink to="/logout">Cerrar sesión</NavLink>}
+        {username && <NavLink to="/orders">Mis compras</NavLink>}
       </NavbarMenu>
     </NavbarContainer>
   );
