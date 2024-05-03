@@ -17,10 +17,9 @@ font-family: Inter;
 
 **CSS HEX**
 
-- white-smoke: #F5F5F5;
-- reseda-green: #6e8f67ff;
-- timberwolf: #dedad2ff;
-- gold-metallic: #c5ab54ff;
+- Reseda-green: rgba(110, 143, 103, 0.75);
+- Reseda-green-hover: rgba(110, 143, 103);
+- WhiteSmoke: #F5F5F5;
 - background: #EDEDED;
 
 ## Logo o Brand (nombre) del ecommerce.
