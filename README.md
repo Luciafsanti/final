@@ -11,7 +11,7 @@ Título:
 font-family: Lobster;
 
 Cuerpo:
-font-family: Inter;
+font-family: arial;
 
 ## Paleta de colores a utilizar.
 
