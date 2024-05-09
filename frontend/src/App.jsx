@@ -11,6 +11,7 @@ import Logout from "./pages/logout";
 import ConfirmOrder from "./pages/confirm-order";
 import OrderDetail from "./pages/order-detail";
 import Orders from "./pages/orders";
+import Products from "./pages/products";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           path="/orders/:order_id/order-detail"
           element={<OrderDetail />}
         />
+        <Route path="/productos" element={<Products />} />
       </Routes>
       <Footer />
     </>

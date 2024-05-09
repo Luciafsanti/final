@@ -153,7 +153,7 @@ const Navbar = () => {
       <NavbarMenu isOpen={isOpen}>
         <NavLink to="/">Home</NavLink>
         {acces_type === "admin" && (
-          <NavLink to="/products">Gestión de productos</NavLink>
+          <NavLink to="/productos">Gestión de productos</NavLink>
         )}
         {!username && (
           <>

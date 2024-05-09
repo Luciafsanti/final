@@ -14,9 +14,10 @@ async function getBookById(req, res) {
   res.json(book);
 }
 
+
 const createBook = async (req, res) => {
-  const { book, price, stock } = req.body;
-  const newBook = await Book.create({ book, price, stock });
+  const { title, author, ISBN, price, stock, category_id, image_url, description } = req.body;
+  const newBook = await Book.create({ title, author, ISBN, price, stock, category_id, image_url, description });
   res.json(newBook);
 };
 
