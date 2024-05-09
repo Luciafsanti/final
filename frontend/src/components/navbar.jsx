@@ -11,7 +11,7 @@ const NavbarContainer = styled.nav`
   padding: 1rem 2rem;
   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
@@ -29,7 +29,7 @@ const NavLink = styled(Link)`
     background-color: var(--Reseda-green);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     padding: 1rem 0.5rem;
     font-size: 1rem;
   }
@@ -42,7 +42,7 @@ const Logo = styled.div`
   font-weight: lighter;
   text-decoration: none;
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     font-size: 30px;
     font-weight: normal;
   }
@@ -67,7 +67,7 @@ const SearchContainer = styled.div`
   align-items: center;
   margin-bottom: 1rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     margin-bottom: 0;
   }
 `;
@@ -109,7 +109,7 @@ const MenuIcon = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     display: block;
   }
 `;
@@ -120,7 +120,7 @@ const NavbarMenu = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -134,7 +134,7 @@ const User = styled.h2`
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { username } = useLogin();
+  const { username, acces_type } = useLogin();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -152,6 +152,9 @@ const Navbar = () => {
       <MenuIcon onClick={toggleMenu}>&#9776;</MenuIcon>
       <NavbarMenu isOpen={isOpen}>
         <NavLink to="/">Home</NavLink>
+        {acces_type === "admin" && (
+          <NavLink to="/products">Gestión de productos</NavLink>
+        )}
         {!username && (
           <>
             <NavLink to="/login">Iniciar sesión</NavLink>
@@ -159,7 +162,9 @@ const Navbar = () => {
           </>
         )}
         <NavLink to="/cart">Carrito</NavLink>
-        {username && <NavLink to="/orders">Mis compras</NavLink>}
+        {username && acces_type !== "admin" && (
+          <NavLink to="/orders">Mis compras</NavLink>
+        )}
         {username && <NavLink to="/logout">Cerrar sesión</NavLink>}
       </NavbarMenu>
     </NavbarContainer>

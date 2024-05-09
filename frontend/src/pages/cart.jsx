@@ -4,15 +4,17 @@ import useCart from "../store/useCart";
 import FormButton from "../components/form/formButton";
 import { useNavigate } from "react-router-dom";
 import ErrorSpan from "../components/form/error-span";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLogin from "../store/useLogin";
 import FormTitle from "../components/form/formTitle";
+import FormInput from "../components/form/formInput";
 
 const CartContainer = styled.div`
   margin: 1rem;
   display: grid;
   flex-direction: row;
   align-items: space-between;
+  height: 100%;
   grid-template-areas:
     "p"
     "i";
@@ -45,6 +47,7 @@ const InfoContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 1rem;
   background-color: var(--WhiteSmoke);
   border-radius: 0.5rem;
 
@@ -74,12 +77,19 @@ const TableBold = styled.td`
 `;
 
 const Cart = (book) => {
-  const { items, setTotalPrice, total } = useCart();
+  const {
+    items,
+    setTotalPrice,
+    total,
+    setAdress,
+    setZIP,
+    shippingAdress,
+    shippingZIP,
+    setShippingCost,
+  } = useCart();
   const navigate = useNavigate();
   const { username, user_id, acces_type } = useLogin();
   const [errors, setErrors] = useState({});
-
-  console.log(acces_type);
 
   const handleOrder = (e) => {
     e.preventDefault();
@@ -88,6 +98,11 @@ const Cart = (book) => {
       console.log(errors);
     } else if (acces_type === "admin") {
       setErrors({ message: "El usuario andministrador no puede comprar" });
+      console.log(errors);
+    } else if (shippingAdress === "" || shippingZIP === "") {
+      setErrors({
+        message: "Debe ingresar una direccion y codigo postal para el envio",
+      });
       console.log(errors);
     } else {
       navigate("/confirmar-compra", { total: subtotal + envio });
@@ -99,17 +114,13 @@ const Cart = (book) => {
 
   let subtotal = prices.reduce((a, b) => a + b, 0);
   let envio = subtotal > 25000 ? 0 : 1600;
-  let totalPrice = subtotal + envio;
 
   useEffect(() => {
     setTotalPrice(subtotal + envio);
+    setShippingCost(envio);
   }, [items]);
   return (
     <CartContainer>
-      {/*JSON.stringify(items)*/}
-      {/*books.map((book) => {
-        return <h2>{book.title}</h2>;
-      })*/}
       <ListContainer>
         {books.map((book) => {
           return <CartProducts book={book} />;
@@ -118,22 +129,47 @@ const Cart = (book) => {
       <InfoContainer>
         {errors && <ErrorSpan>{errors.message}</ErrorSpan>}
         {(Object.keys(items).length > 0 && (
-          <Table>
-            <tbody>
-              <TableRow>
-                <TableData>Subtotal</TableData>
-                <TableBold>$ {subtotal}</TableBold>
-              </TableRow>
-              <TableRow>
-                <TableData>Envío</TableData>
-                <TableBold>$ {envio}</TableBold>
-              </TableRow>
-              <TableRow>
-                <TableBold>TOTAL</TableBold>
-                <TableBold>$ {total}</TableBold>
-              </TableRow>
-            </tbody>
-          </Table>
+          <div>
+            <FormTitle>
+              <h2 style={{ fontSize: "15px" }}>
+                Datos de envío (dirección: calle, numero)
+              </h2>
+            </FormTitle>
+            <div
+              style={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}
+            >
+              <FormInput
+                placeholder="Direccion"
+                type="text"
+                defaultValue={shippingAdress}
+                onChange={(e) => setAdress(e.target.value)}
+                style={{ maxWidth: "18rem" }}
+              />
+              <FormInput
+                placeholder="Codigo postal"
+                type="number"
+                defaultValue={shippingZIP}
+                style={{ maxWidth: "6rem" }}
+                onChange={(e) => setZIP(e.target.value)}
+              />
+            </div>
+            <Table>
+              <tbody>
+                <TableRow>
+                  <TableData>Subtotal</TableData>
+                  <TableBold>$ {subtotal}</TableBold>
+                </TableRow>
+                <TableRow>
+                  <TableData>Envío</TableData>
+                  <TableBold>$ {envio}</TableBold>
+                </TableRow>
+                <TableRow>
+                  <TableBold>TOTAL</TableBold>
+                  <TableBold>$ {total}</TableBold>
+                </TableRow>
+              </tbody>
+            </Table>
+          </div>
         )) || (
           <FormTitle
             style={{

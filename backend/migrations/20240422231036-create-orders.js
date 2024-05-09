@@ -23,6 +23,14 @@ module.exports = {
       total_price: {
         type: Sequelize.FLOAT
       },
+      adress: {
+        type: Sequelize.STRING(500),
+        allowNull: false
+      },
+      zipcode: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

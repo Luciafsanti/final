@@ -11,6 +11,7 @@ const SearchContainer = styled.form`
 
   @media (min-width: 768px) {
     margin-bottom: 0;
+    flex-direction: row;
   }
 `;
 
@@ -39,10 +40,6 @@ const SearchButton = styled(Button)`
   margin-right: 0.5rem;
 `;
 
-const FilterButton = styled(Button)`
-  margin-right: 1rem;
-`;
-
 const FilterSelect = styled.select`
   height: auto;
   max-width: 6rem;
@@ -52,7 +49,7 @@ const FilterSelect = styled.select`
 
 const FilterPrice = styled.input`
   height: 25px;
-  max-width: 5rem;
+  max-width: 6rem;
   border-radius: 4px;
   border: 1px solid #ccc;
   margin-right: 0.5rem;

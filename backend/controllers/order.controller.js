@@ -40,8 +40,8 @@ const newOrderDetail = async (req, res, next) => {
 
 
 async function createOrder(req, res) {
-    const { user_id, total_price } = req.body;
-    const newOrder = await Order.create({ user_id, total_price });
+    const { user_id, total_price, adress, zipcode } = req.body;
+    const newOrder = await Order.create({ user_id, total_price, adress, zipcode });
     res.json(newOrder);
 
 }

@@ -36,6 +36,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     total_price: {
       type: DataTypes.FLOAT
+    },
+    adress: {
+      type: DataTypes.STRING(500),
+      allowNull: false
+    },
+    zipcode: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,

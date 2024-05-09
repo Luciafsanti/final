@@ -80,13 +80,23 @@ function OrderDetail() {
               <tr>
                 <td colSpan="4">Cargando...</td>
               </tr>
-            )}{" "}
+            )}
             <tr>
               <td></td>
               <td></td>
               <td></td>
-              <td> </td>
+              <td></td>
             </tr>
+            {order && (
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Direccion de envio</td>
+                <td>
+                  {order.adress} - CP: {order.zipcode}
+                </td>
+              </tr>
+            )}
             {order && (
               <tr>
                 <td></td>
