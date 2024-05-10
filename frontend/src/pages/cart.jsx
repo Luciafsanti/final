@@ -99,7 +99,7 @@ const Cart = (book) => {
     } else if (acces_type === "admin") {
       setErrors({ message: "El usuario andministrador no puede comprar" });
       console.log(errors);
-    } else if (shippingAdress === "" || shippingZIP === "") {
+    } else if (shippingAdress === "" || shippingZIP === 0) {
       setErrors({
         message: "Debe ingresar una direccion y codigo postal para el envio",
       });

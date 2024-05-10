@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useBooks from "../hooks/use-books";
 import Table from "../components/table";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import FormTitle from "../components/form/formTitle";
 import FormButton from "../components/form/formButton";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useCategories from "../hooks/use-categories";
 
 const Container = styled.div`
   width: 80vw;
@@ -18,6 +19,7 @@ const Container = styled.div`
 function Products() {
   const { books } = useBooks();
   const navigate = useNavigate();
+  const { categories } = useCategories();
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -41,6 +43,12 @@ function Products() {
     const id = e.target.id;
     navigate("/editar-producto/" + id);
   };
+
+  const categoriesNames = categories
+    .sort((c1, c2) => c1.category_id - c2.category_id)
+    .map((c) => c.category_name);
+
+  console.log(categoriesNames);
 
   return (
     <BodyContainer>
@@ -82,16 +90,21 @@ function Products() {
                     />
                   </td>
                   <td>
-                    <td>{book.title}</td>
-                    <td>{book.author}</td>
-                    <td>{book.ISBN}</td>
+                    <td>
+                      {book.book_id}) Titulo: {book.title}
+                    </td>
+                    <td>Autor: {book.author}</td>
+                    <td>ISBN: {book.ISBN}</td>
                     <tr>
-                      <td>{book.price}</td>
-                      <td>{book.stock}</td>
-                      <td>{book.category_id}</td>
+                      <td>$ {book.price}</td>
+                      <td>Stock: {book.stock}</td>
+                      <td>Cat.: {categoriesNames[book.category_id - 1]}</td>
                     </tr>
                     <tr>
-                      <td colSpan={6}>{book.description}</td>
+                      <td colSpan={6}>
+                        Descripcion: <br />
+                        {book.description}
+                      </td>
                     </tr>
                     <tr>
                       <td colSpan={3}>

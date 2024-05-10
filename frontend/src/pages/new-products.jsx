@@ -8,6 +8,8 @@ import axios from "axios";
 import ErrorSpan from "../components/form/error-span";
 import { useNavigate } from "react-router-dom";
 import useBooks from "../hooks/use-books";
+import Table from "../components/table";
+import useCategories from "../hooks/use-categories";
 
 const NewProduct = () => {
   const [title, setTitle] = useState("");
@@ -21,6 +23,7 @@ const NewProduct = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { books } = useBooks();
+  const { categories } = useCategories();
 
   console.log(
     title,
@@ -101,12 +104,20 @@ const NewProduct = () => {
       });
   };
 
+  const categoriesNames = categories
+    .sort((c1, c2) => c1.category_id - c2.category_id)
+    .map((c) => c.category_name);
+
   return (
     <FormContainer>
       <FormTitle>
         <h2>Nuevo producto</h2>
       </FormTitle>
-      <FormComponent onSubmit={handleSubmit} action="/">
+      <FormComponent
+        onSubmit={handleSubmit}
+        action="/"
+        style={{ gridArea: "f" }}
+      >
         {errors.newBook && <ErrorSpan>{errors.newBook.message}</ErrorSpan>}
         <FormInput
           type="text"
@@ -149,6 +160,29 @@ const NewProduct = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
         <FormButton>Agregar</FormButton>
+      </FormComponent>
+      <FormTitle>
+        <h2>Referencia de categorias</h2>
+      </FormTitle>
+      <FormComponent style={{ gridArea: "t" }}>
+        <Table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categoría</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((c, index) => {
+              return (
+                <tr key={c.category_id}>
+                  <td>{index + 1}</td>
+                  <td>{categoriesNames[index]}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </FormComponent>
     </FormContainer>
   );

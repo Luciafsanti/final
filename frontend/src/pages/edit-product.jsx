@@ -77,8 +77,11 @@ const EditProduct = () => {
 
   return (
     <FormContainer>
-      <FormTitle>
-        <h2>Nuevo producto</h2>
+      <FormTitle
+        style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+      >
+        <h2>Editar producto</h2>
+        <p>Ingrese solo los campos a modificar</p>
       </FormTitle>
       <FormComponent onSubmit={handleUpdate} action="/productos">
         {errors.newBook && <ErrorSpan>{errors.newBook.message}</ErrorSpan>}
@@ -122,7 +125,7 @@ const EditProduct = () => {
           placeholder="Descripción"
           onChange={(e) => setDescription(e.target.value)}
         />
-        <FormButton>Editar</FormButton>
+        <FormButton>Guardar</FormButton>
       </FormComponent>
     </FormContainer>
   );
