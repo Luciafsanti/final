@@ -22,22 +22,27 @@ const createBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  let { bookId } = req.params;
-  let book = Book.findByPk(bookId);
+  let { bookId: book_id } = req.params;
+  let book = Book.findByPk(book_id);
   if (book) {
-    let { newBookName, newPrice, newStock } = req.body;
-    console.log(newBookName, newPrice, newStock);
-    if (newBookName != undefined || newPrice != undefined || newStock != undefined) {
+    let { newTitle, newAuthor, newISBN, newPrice, newStock, newCategory_id, newImage_url, newDescription } = req.body;
+    console.log(newTitle, newAuthor, newISBN, newPrice, newStock, newCategory_id, newImage_url, newDescription);
+    if (newTitle != undefined || newAuthor != undefined || newISBN != undefined || newPrice != undefined || newStock != undefined || newCategory_id != undefined || newImage_url != undefined || newDescription != undefined) {
       await Book.update({
-        book: newBookName || book.book,
+        title: newTitle || book.title,
+        author: newAuthor || book.author,
+        ISBN: newISBN || book.ISBN,
         price: newPrice || book.price,
-        stock: newStock || book.stock
+        stock: newStock || book.stock,
+        category_id: newCategory_id || book.category_id,
+        image_url: newImage_url || book.image_url,
+        description: newDescription || book.description,
       }, {
         where: {
-          book_id: bookId
+          book_id: book_id
         }
       });
-      res.status(200).json({ message: `Book "${bookId}" updated successfully` });
+      res.status(200).json({ message: `Book "${book_id}" updated successfully` });
     } else {
       res.status(404).json({ message: `Faltan nuevos datos` });
     }
