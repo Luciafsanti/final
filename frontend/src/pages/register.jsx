@@ -26,12 +26,16 @@ const Register = () => {
     if (
       !username ||
       username.length < 5 ||
-      users.find((user) => user.username === username)
+      users.find(
+        (user) => user.username.toLowerCase() === username.toLowerCase()
+      )
     ) {
       setErrors((prev) => ({
         ...prev,
         username: {
-          message: users.find((user) => user.username === username)
+          message: users.find(
+            (user) => user.username.toLowerCase() === username.toLowerCase()
+          )
             ? "Este usuario ya existe."
             : "Este campo es requerido y debe tener al menos 5 caracteres.",
         },

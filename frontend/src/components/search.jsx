@@ -42,8 +42,12 @@ const SearchButton = styled(Button)`
 
 const FilterSelect = styled.select`
   height: auto;
-  max-width: 6rem;
+  max-width: 6.5rem;
   font-size: auto;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
   margin-right: 0.5rem;
 `;
 

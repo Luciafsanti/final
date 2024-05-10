@@ -39,8 +39,6 @@ const BookCover = styled(Container)`
   justify-content: center;
   grid-area: b;
   border-radius: 0.5rem;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
 
   && img {
     height: 350px;
@@ -70,6 +68,10 @@ const BookTitle = styled(Container)`
     text-decoration: none;
     color: black;
   }
+
+  @media (min-width: 768px) {
+    border-radius: 0.5rem 0rem 0rem 0.5rem;
+  }
 `;
 
 const Button = styled.button`
@@ -94,6 +96,12 @@ const BookDescription = styled(Container)`
   flex-direction: column;
   text-align: justify;
   gap: 1rem;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    border-radius: 0rem 0.5rem 0.5rem 0rem;
+  }
 `;
 
 const Title = styled.h2`
